@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block titulo %} Tabela de Controle {% endblock %} 
+
+{% block conteudo %} 
+
+<div class="card">
+    <div class="card-header">
+        Cadastrar Controle
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Tabela de Controle</h4>
+        {% include 'veiculos/form.html' %}
+
+    </div>
+    
+</div>
+
+{% endblock %}

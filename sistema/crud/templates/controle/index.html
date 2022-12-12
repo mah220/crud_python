@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block titulo %} Controle {% endblock %} 
+
+{% block conteudo %} 
+
+<div class="card">
+    <div class="card-header">
+        <a name="" id="" class="btn btn-dark" href="{% url 'cadastro_controle' %}" role="button">Cadastrar um novo controle</a>
+    </div>
+
+    <form method="GET">
+        <div class="row p-3">
+            <div class="col-md-3 col-sm-6 col-lg-2 ">
+                
+                <div>             
+                    <label for="" class="form-label">Pesquisa por Data Saida</label>
+                    <input type="date" class="form-control" name="search" id="search" aria-describedby="helpId" placeholder="Pesquisa por Data_Saida">
+                    <button class="btn btn-outline-secondary mt-2" type="submit">Pesquisar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <div class="card-body">
+        {% if oleo %}
+            <h4>O veiculo selecionado é preciso trocar óleo.</h4>
+        {%endif%}
+        <h4 class="card-title">Controle de veiculos</h4>
+
+        <div class="table-responsive">
+            <table class="table table-primary">
+                <thead>
+                    <tr>
+                        <th scope="col">Veiculo/Placa</th>
+                        <th scope="col">Motorista</th>
+                        <th scope="col">Data Saida</th>
+                        <th scope="col">Hora saida</th>
+                        <th scope="col">Km Saida</th>
+                        <th scope="col">Destino</th>
+                        <th scope="col">Data Retorno</th>
+                        <th scope="col">Hora Retorno</th>
+                        <th scope="col">KM Retorno</th>
+                        <th scope="col">KM Percorrido</th>
+                        <th scope="col">Ferramentas</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <!----------------->
+                    <!--    FORM    -->
+                    <!----------------->
+
+                    {% for controle in controles %}
+                    <tr class="">
+                        <td>{{ controle.veiculo.veiculo }} - {{ controle.veiculo.placa }}</td>
+                        <td>{{ controle.motorista.nome }} </td>
+                        <td> {{ controle.data_saida }} </td>
+                        <td> {{ controle.hora_saida }} </td>
+                        <td> {{ controle.km_saida }} </td>
+                        <td> {{ controle.destino }} </td>
+                        <td> {{ controle.data_retorno }} </td>
+                        <td> {{ controle.hora_retorno }} </td>
+                        <td> {{ controle.km_retorno }} </td>
+                        <td> {{ controle.km_percorrido }} </td>
+                        
+                        <td> 
+                            <a name="" id="" class="btn btn-primary" href="{% url 'visualizar_controle' controle.id %}" role="button">Visualizar</a>
+                            |
+                            <a name="" id="" class="btn btn-warning" href="{% url 'editar_controle' controle.id %}" role="button">Editar</a>
+                            |
+                            <a name="" id="" class="btn btn-danger"  href="#" data-bs-toggle="modal" data-bs-target="#modal-{{ controle.id }}" role="button">Excluir</a>
+                        </td>
+                    </tr>
+
+
+                    <!----------------->
+                    <!--    MODAL    -->
+                    <!----------------->
+
+                    <div class="modal fade" id="modal-{{ controle.id }}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalTitleId">Excluir item selecionado?</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    O item selecionado sera apagado PERMANENTEMENTE. Você não podera desfazer essa ação.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <a name="" id="" class="btn btn-danger"  href="{% url 'excluir_controle' controle.id %}" role="button">Excluir</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+
+    
+</div>
+
+{% endblock %}

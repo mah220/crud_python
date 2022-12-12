@@ -1,0 +1,39 @@
+<form enctype="multipart/form-data" method="post" id="form_controle">
+
+    {% csrf_token %}
+    {% for campo in formulario %}
+  
+      <div class="mb-3">
+        <label for="" class="form-label">{{ campo.label }}</label>
+
+        <input
+        {% if visualizacao %} readonly {% endif %}
+        type="{{ campo.field.widget.input_type }}"
+        class="form-control" 
+        name="{{ campo.name }}" 
+        id="{{campo.name}}" 
+        aria-describedby="helpId" 
+        placeholder="{{ campo.label }}"
+        {% if campo.field.widget.input_type == 'date' %}
+        value="{{ campo.value|date:'Y-m-d'|default:'' }}" 
+        {% else %}
+        value="{{ campo.value|default:'' }}"
+        {% endif %}
+
+        
+        >
+        
+      </div>
+  
+      <div class="col-12 help-text" > {{campo.errors}} </div>
+  
+    {% endfor %} 
+    
+
+    {% if not visualizacao %}
+      <input name="" id="" class="btn btn-success" type="submit" value="Enviar Informação">
+      <a name="" id="" class="btn btn-primary" href="{% url 'controle' %}" role="button">Cancelar</a>
+    {% else %}
+      <a name="" id="" class="btn btn-primary" href="{% url 'controle' %}" role="button">Voltar</a>
+    {% endif %}
+  </form>

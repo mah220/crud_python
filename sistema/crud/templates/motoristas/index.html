@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block titulo %} motoristas {% endblock %} 
+
+{% block conteudo %} 
+
+<div class="card">
+    <div class="card-header">
+        <a name="" id="" class="btn btn-dark" href="{% url 'cadastro_motoristas' %}" role="button">Cadastrar novo motorista</a>
+    </div>
+
+
+    <div class="card-body">
+        <h4 class="card-title">Motoristas</h4>
+
+        <div class="table-responsive">
+            <table class="table table-primary">
+                <thead>
+                    <tr>
+                        <th scope="col">Cod_motorista</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col">CNH</th>
+                        <th scope="col">Ferramentas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for motorista in motoristas %}
+                    <tr>
+                        <td>{{ motorista.id }}</td>
+                        <td>{{ motorista.nome }}</td>
+                        <td>{{ motorista.telefone }}</td>
+                        <td>{{ motorista.cnh }}</td>
+                        <td> 
+                            <a name="" id="" class="btn btn-primary" href="{% url 'visualizar_motoristas' motorista.id  %}" role="button">Visualizar</a>
+                            |
+                            <a name="" id="" class="btn btn-warning" href=" {% url 'editar_motoristas' motorista.id  %} " role="button">Editar</a>
+                            |
+                            <a name="" id="" class="btn btn-danger"  href="#" data-bs-toggle="modal" data-bs-target="#modal-{{ motorista.id }}" role="button">Excluir</a>
+                        </td>
+                    </tr>
+                    <div class="modal fade" id="modal-{{ motorista.id }}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalTitleId">Excluir item selecionado?</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    O item selecionado ser apagado PERMANENTEMENTE. Você não podera desfazer essa ação.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <a name="" id="" class="btn btn-danger"  href="{% url 'excluir_motorista' motorista.id %}" role="button">Excluir</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+
+    
+</div>
+
+
+{% endblock %}
+
+    

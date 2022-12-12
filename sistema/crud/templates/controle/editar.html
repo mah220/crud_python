@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block titulo %} Editar Tabela de Controle {% endblock %} 
+
+{% block conteudo %} 
+
+<div class="card">
+
+    <div class="card-header">
+        Editar informações do Controle
+    </div>
+    
+    <div class="card-body">
+        <h4 class="card-title">Tabela de Controle</h4>
+        {% include 'controle/form.html' %}
+    </div>
+    
+</div>
+
+<script>
+    let formulario = document.getElementById('form_controle')
+    var veiculo = "{{veiculo.placa}}"
+    var troca_oleo = function(event) {
+        var km_retorno = document.getElementById('km_retorno').value
+        var km_troca_oleo = "{{veiculo.km}}"
+        km_retorno = Number(km_retorno)
+        km_troca_oleo = Number(km_troca_oleo)
+        console.log(km_retorno >= km_troca_oleo)
+        if(km_retorno >= km_troca_oleo){
+            alert(`Veiculo com a placa ${veiculo} precisa trocar de oleo`)    
+        }
+    };
+
+
+    // attach event listener
+    formulario.addEventListener("submit", troca_oleo, true)
+</script>
+
+{% endblock %}

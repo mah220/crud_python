@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block titulo %} Cadastro de Motorista {% endblock %} 
+
+{% block conteudo %} 
+
+<div class="card">
+    <div class="card-header">
+        Cadastre um Motorista
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Dados do Motorista</h4>
+        {% include 'motoristas/form.html' %}
+
+    </div>
+    
+</div>
+
+{% endblock %}
