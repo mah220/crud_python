@@ -132,7 +132,6 @@ def editar_motorista(request, id):
 ###############
 
 def controles(request):
-    oleoFalse()
     busca = request.GET.get('search', '')
     controles = Controle.objects.all().order_by('-data_saida', '-hora_saida')
     if busca:
@@ -140,7 +139,6 @@ def controles(request):
     return render(request, "controle/index.html", {'controles': controles, 'oleo': oleo})
 
 def cadastro_controle(request):
-    oleoFalse()
     formulario = ControleForm(request.POST or None)
     if formulario.is_valid():
         formulario.save()
@@ -154,7 +152,6 @@ def cadastro_controle(request):
     return render(request, "motoristas/cadastro.html", {'formulario': formulario})
 
 def editar_controle(request, id):
-    oleoFalse()
     controle = Controle.objects.get(id=id)
     veiculo = Veiculo.objects.get(id=controle.veiculo.id)
     formulario = ControleForm(request.POST or None, instance=controle)
@@ -164,7 +161,6 @@ def editar_controle(request, id):
     return render(request, "controle/editar.html", {'formulario': formulario, 'veiculo': veiculo})
 
 def visualizar_controle(request, id):
-    oleoFalse()
     controle= Controle.objects.get(id=id)
     visualizacao = True
     formulario = ControleForm(instance=controle)
